@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <!-- Add Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 <body>
     <?php $page_id = 'login'; ?>
@@ -32,8 +34,17 @@
                             <input type="password" class="form-control" id="password" name="password" required>
                         </div>
 
+                        <div class="row">
+                            <div class="g-recaptcha" data-sitekey="6Lc2dXooAAAAAIAfUNT0DOVxbAGilMNK4Spr6Df_"></div>
+                        </div>
+                        
+
+
                         <button type="submit" class="btn btn-primary">Login</button>
                     </form>
+                    <div class="mt-4">
+                        Don't have account..?<a href="registration.php">Sign up</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -81,7 +92,6 @@
     }
 </script>
 <!-- Add Bootstrap JS and jQuery (for Bootstrap) if needed -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 
 </body>
