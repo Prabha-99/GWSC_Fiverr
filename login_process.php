@@ -12,37 +12,75 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    // Query the database to check if the user exists
-    $query = "SELECT * FROM users WHERE email = '$email'";
-    $result = mysqli_query($conn, $query);
+    // Verify reCAPTCHA
+    $recaptchaResponse = $_POST['g-recaptcha-response'];
+    $secretKey = '6Lc2dXooAAAAAAXMS1tAhsRxJw9y1yBNWgTVoKB3'; // Replace with your reCAPTCHA secret key
 
-    if ($result && mysqli_num_rows($result) > 0) {
-        $user = mysqli_fetch_assoc($result);
+    $url = 'https://www.google.com/recaptcha/api/siteverify';
+    $data = [
+        'secret' => $secretKey,
+        'response' => $recaptchaResponse,
+    ];
 
-        // Verify the password (you should use password_hash() when registering users)
-        if (password_verify($password, $user['password'])) {
-            // Authentication successful
-            $_SESSION['user_id'] = $user['uid'];
-            $_SESSION['user_firstname'] = $user['firstname'];
-            $_SESSION['user_lastname'] = $user['lastname'];
+    $options = [
+        'http' => [
+            'header' => "Content-type: application/x-www-form-urlencoded\r\n",
+            'method' => 'POST',
+            'content' => http_build_query($data),
+        ],
+    ];
 
-            // Reset login attempts
-            unset($_SESSION['login_attempts']);
-            unset($_SESSION['lockout_start']);
+    $context = stream_context_create($options);
+    $result = file_get_contents($url, false, $context);
 
-            // Redirect to a protected page
-            header('Location: index.php');
-            exit();
+    if ($result !== false) {
+        $responseData = json_decode($result);
+
+        if ($responseData->success) {
+            // reCAPTCHA was verified successfully
+            // Query the database to check if the user exists
+            $query = "SELECT * FROM users WHERE email = '$email'";
+            $result = mysqli_query($conn, $query);
+
+            if ($result && mysqli_num_rows($result) > 0) {
+                $user = mysqli_fetch_assoc($result);
+
+                // Verify the password (you should use password_hash() when registering users)
+                if (password_verify($password, $user['password'])) {
+                    // Authentication successful
+                    $_SESSION['user_id'] = $user['uid'];
+                    $_SESSION['user_firstname'] = $user['firstname'];
+                    $_SESSION['user_lastname'] = $user['lastname'];
+
+                    // Reset login attempts
+                    unset($_SESSION['login_attempts']);
+                    unset($_SESSION['lockout_start']);
+
+                    // Redirect to a protected page
+                    header('Location: index.php');
+                    exit();
+                } else {
+                    // Invalid password
+                    incrementLoginAttempts();
+                    header('Location: login.php?error=invalid_password');
+                    exit();
+                }
+            } else {
+                // User not found
+                incrementLoginAttempts();
+                header('Location: login.php?error=user_not_found');
+                exit();
+            }
         } else {
-            // Invalid password
+            // CAPTCHA verification failed
             incrementLoginAttempts();
-            header('Location: login.php?error=invalid_password');
+            header('Location: login.php?error=captcha_failed');
             exit();
         }
     } else {
-        // User not found
+        // Unable to verify CAPTCHA; handle the error
         incrementLoginAttempts();
-        header('Location: login.php?error=user_not_found');
+        header('Location: login.php?error=captcha_verification_error');
         exit();
     }
 } else {
