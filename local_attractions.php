@@ -4,53 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Local Attractions</title>
-    <!-- Add Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Add your custom CSS for the Local Attractions page -->
-    <link rel="stylesheet" href="CSS/local_attractions.css">
+    <link rel="stylesheet" href="CSS/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 </head>
 <body>
-<?php include 'navbar.php'; ?>
-<br><br><br>
+    <?php include 'navbar.php'; ?>
+
     <div class="container">
         <h1 class="mt-5">Local Attractions</h1>
 
         <div class="row mt-4">
-            <!-- Local Attraction Card 1 -->
-            <div class="col-md-4">
-                <div class="card local-attractions-card">
-                    <img src="images/attraction1.jpg" class="card-img-top" alt="Attraction 1">
-                    <div class="card-body">
-                        <h5 class="card-title">Attraction 1</h5>
-                        <p class="card-text">Description of Attraction 1. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        <a href="#" class="btn btn-primary">Learn More</a>
-                    </div>
-                </div>
-            </div>
+            <?php
+            // Include your database connection file
+            require_once 'db_connection.php';
 
-            <!-- Local Attraction Card 2 -->
-            <div class="col-md-4">
-                <div class="card local-attractions-card">
-                    <img src="images/attraction2.jpg" class="card-img-top" alt="Attraction 2">
-                    <div class="card-body">
-                        <h5 class="card-title">Attraction 2</h5>
-                        <p class="card-text">Description of Attraction 2. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        <a href="#" class="btn btn-primary">Learn More</a>
-                    </div>
-                </div>
-            </div>
+            // Define a query to retrieve local attractions data
+            $query = "SELECT * FROM local_attractions";
 
-            <!-- Local Attraction Card 3 -->
-            <div class="col-md-4">
-                <div class="card local-attractions-card">
-                    <img src="images/attraction3.jpg" class="card-img-top" alt="Attraction 3">
-                    <div class="card-body">
-                        <h5 class="card-title">Attraction 3</h5>
-                        <p class="card-text">Description of Attraction 3. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        <a href="#" class="btn btn-primary">Learn More</a>
-                    </div>
-                </div>
-            </div>
+            // Execute the query
+            $result = mysqli_query($conn, $query);
+
+            // Check if there are results
+            if (mysqli_num_rows($result) > 0) {
+                // Loop through the results and generate cards
+                while ($row = mysqli_fetch_assoc($result)) {
+                    echo '<div class="col-md-4">';
+                    echo '<div class="card local-attractions-card">';
+                    echo '<img src="' . $row['image'] . '" class="card-img-top" alt="' . $row['alt'] . '">';
+                    echo '<div class="card-body">';
+                    echo '<h5 class="card-title">' . $row['alt'] . '</h5>';
+                    echo '<p class="card-text">' . $row['description'] . '</p>';
+                    echo '<a href="#" class="btn btn-primary">Learn More</a>';
+                    echo '</div>';
+                    echo '</div>';
+                    echo '</div>';
+                }
+            } else {
+                echo '<p>No local attractions found.</p>';
+            }
+
+            // Close the database connection
+            mysqli_close($conn);
+            ?>
         </div>
     </div>
 

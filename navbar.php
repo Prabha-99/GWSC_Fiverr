@@ -20,7 +20,7 @@
           <a class="nav-link" href="local_attractions.php">Local Attractions</a>
         </li>
         <li class="nav-item me-5">
-          <a class="nav-link" href="#about">Contact</a>
+          <a class="nav-link" href="contact.php">Contact</a>
         </li>
         
         <!-- Account dropdown menu -->

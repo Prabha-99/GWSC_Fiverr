@@ -45,6 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <?php include 'header.php'; ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us</title>
@@ -54,6 +55,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 </head>
 <body>
+    <?php include 'navbar.php'; ?>
+    <br><br><br>
     <div class="container">
         <h1 class="mt-5">Contact Us</h1>
 
@@ -89,6 +92,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <a href="privacy_policy.php">Privacy Policy</a>
         </div>
     </div>
+
+    <section class="footer">
+        <?php include 'footer.php'; ?>
+    </section>
 
     <!-- Add Bootstrap JS and jQuery (for Bootstrap) if needed -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
