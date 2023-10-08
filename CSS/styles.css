@@ -111,6 +111,12 @@ body, h1, h2, h3, p, ul, li {
     background-repeat: no-repeat;
   }
 
+  .information-body{
+    background-image: url('../ASSETS/pines.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
 
   /* Header styles */
   .header {

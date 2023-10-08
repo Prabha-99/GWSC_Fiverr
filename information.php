@@ -45,36 +45,143 @@
         }
     </script>
 </head>
-<body>
-    <?php include 'navbar.php'; ?>
+<body class="information-body">
+    <?php include 'navbar.php'; ?><br><br><br>
 
     <div class="container">
-        <h1 class="mt-5">Information</h1>
-
-        <!-- Section: Pitch Types and Availability -->
+        
         <section>
             <h2 class="mt-4">Pitch Types and Availability</h2>
-            <!-- Add content related to pitch types and availability here -->
-        </section>
+            <div class="container">
+        
+                        <form method="GET">
+                            <div class="mb-3">
+                                <label for="pitch_type" class="form-label">Select Pitch Type:</label>
+                                <select class="form-select" name="pitch_type" id="pitch_type">
+                                    <option value="tent">Tent Pitch</option>
+                                    <option value="caravan">Touring Caravan Pitch</option>
+                                    <option value="motorhome">Motorhome Pitch</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="arrival_date" class="form-label">Arrival Date:</label>
+                                <input type="date" class="form-control" name="arrival_date" id="arrival_date" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="departure_date" class="form-label">Departure Date:</label>
+                                <input type="date" class="form-control" name="departure_date" id="departure_date" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Search Availability</button>
+                        </form>
 
-        <!-- Section: Features -->
-        <section>
-            <h2 class="mt-4">Features</h2>
-            <!-- Add content related to features here -->
-        </section>
+                        <!-- Display Search Results -->
+                        <?php
 
-        <!-- Section: Location and Maps -->
+                            require_once('db_connection.php'); 
+
+                            if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+                                // Check if the 'pitch_type' parameter is set in the URL
+                                if (isset($_GET['pitch_type'])) {
+                                
+                                    $pitchType = $_GET['pitch_type'];
+                                    $arrivalDate = $_GET['arrival_date'];
+                                    $departureDate = $_GET['departure_date'];
+
+                                    
+                                    $sql = "SELECT pitch_number, is_available FROM availability
+                                            WHERE pitch_type = '$pitchType'
+                                            AND arrival_date >= '$arrivalDate'
+                                            AND departure_date <= '$departureDate'";
+
+                                
+                                    $queryResults = [];
+                                    $result = mysqli_query($conn, $sql);
+
+                                    if ($result) {
+                                        
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                            $queryResults[] = $row;
+                                        }
+
+                                    
+                                        echo '<h2 class="mt-4">Search Results:</h2>';
+                                        echo '<table class="table">';
+                                        echo '<thead>';
+                                        echo '<tr>';
+                                        echo '<th scope="col">Pitch Number</th>';
+                                        echo '<th scope="col">Availability</th>';
+                                        echo '</tr>';
+                                        echo '</thead>';
+                                        echo '<tbody>';
+                                        foreach ($queryResults as $result) {
+                                            echo '<tr>';
+                                            echo '<td>' . $result['pitch_number'] . '</td>';
+                                            echo '<td>' . $result['is_available'] . '</td>';
+                                            echo '</tr>';
+                                        }
+                                        echo '</tbody>';
+                                        echo '</table>';
+                                    } else {
+                                        
+                                        echo '<p>Error executing the query: ' . mysqli_error($conn) . '</p>';
+                                    }
+
+                                    
+                                    mysqli_close($conn);
+                                } else {
+                                    
+                                    echo '<p>Please select a pitch type.</p>';
+                                }
+                            }
+                ?>
+
+
+    </div>
+        </section>
+  
         <section>
             <h2 class="mt-4">Location and Maps</h2>
-            <!-- Add content related to location and maps here -->
+            <div class="container">
+                <div id="map" style="width: 100%; height: 450px;"></div>
+            </div>
         </section>
 
-        <!-- Section: Local Attractions -->
         <section>
             <h2 class="mt-4">Local Attractions</h2>
-            <!-- Add content related to local attractions here -->
+                
+                <div class="row mt-4">
+                <?php
+                require_once 'db_connection.php';
+                $query = "SELECT * FROM local_attractions";
+                $result = mysqli_query($conn, $query);
+
+                if (mysqli_num_rows($result) > 0) {
+                    // Loop through the results and generate cards
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        echo '<div class="col-md-4">';
+                        echo '<div class="card local-attractions-card">';
+                        echo '<img src="' . $row['image'] . '" class="card-img-top" alt="' . $row['alt'] . '">';
+                        echo '<div class="card-body">';
+                        echo '<h5 class="card-title">' . $row['alt'] . '</h5>';
+                        echo '<p class="card-text">' . $row['description'] . '</p>';
+                        // Pass the site ID as a URL parameter in the "Learn More" link
+                        echo '<a href="features.php?site_id=' . $row['id'] . '" class="btn btn-success">Learn More</a>';
+                        echo '</div>';
+                        echo '</div>';
+                        echo '</div>';
+                    }
+                } else {
+                    echo '<p>No local attractions found.</p>';
+                }
+                mysqli_close($conn);
+                ?>
+            </div>
         </section>
     </div>
+
+    <section class="footer">
+        <?php include 'footer.php'; ?>
+    </section>
 
     <script src=”https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js”></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

@@ -10,7 +10,7 @@
     
 </head>
 <body class="pitchAvailability-body">
-    <?php include 'navbar.php'; ?><br><br><br>
+    <?php include 'navbar.php'; ?><br><br><br><br>
     <div class="container">
         <h1 class="mt-5">Pitch Types and Availability</h1>
 

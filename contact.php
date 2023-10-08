@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Contact Us</title>
 </head>
 <body class="contact-body">
-    <?php include 'navbar.php'; ?><br><br><br>
+    <?php include 'navbar.php'; ?><br><br><br><br>
     
     <div class="container">
         <h1 class="mt-5">Contact Us</h1>

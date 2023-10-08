@@ -11,7 +11,7 @@
     
 </head>
 <body class="arractionAttraction-body">
-    <?php include 'navbar.php'; ?><br><br><br>
+    <?php include 'navbar.php'; ?><br><br><br><br>
 
     <div class="container">
         <h1 class="mt-5">Local Attractions</h1>
@@ -31,7 +31,8 @@
                     echo '<div class="card-body">';
                     echo '<h5 class="card-title">' . $row['alt'] . '</h5>';
                     echo '<p class="card-text">' . $row['description'] . '</p>';
-                    echo '<a href="#" class="btn btn-success">Learn More</a>';
+                    // Pass the site ID as a URL parameter in the "Learn More" link
+                    echo '<a href="features.php?site_id=' . $row['id'] . '" class="btn btn-success">Learn More</a>';
                     echo '</div>';
                     echo '</div>';
                     echo '</div>';

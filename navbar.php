@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
 </head>
 <body>
 
@@ -20,7 +19,7 @@
           <a class="nav-link" href="index.php">Home</a>
         </li>
         <li class="nav-item me-5">
-          <a class="nav-link" href="#about">Information</a>
+          <a class="nav-link" href="information.php">Information</a>
         </li>
         <li class="nav-item me-5">
           <a class="nav-link" href="local_attractions.php">Attractions</a>
@@ -48,7 +47,7 @@
 
         <!-- Search Bar -->
         <div class="input-group mb-3">
-            <input type="text" class="form-control" id="attraction-search" placeholder="Search local attractions...">
+            <input type="text" class="form-control" id="attraction-search" placeholder="Search here...">
             <button class="btn btn-success" id="search-button">Search</button>
         </div>
         <!-- Search Results -->
