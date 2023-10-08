@@ -37,6 +37,9 @@
 
         <!-- Display Search Results -->
         <?php
+
+            require_once('db_connection.php'); 
+
             if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 // Check if the 'pitch_type' parameter is set in the URL
                 if (isset($_GET['pitch_type'])) {
@@ -44,10 +47,6 @@
                     $pitchType = $_GET['pitch_type'];
                     $arrivalDate = $_GET['arrival_date'];
                     $departureDate = $_GET['departure_date'];
-
-                    // Perform database query using these parameters
-                    // Replace this with your actual database query
-                    require_once('db_connection.php'); // Include your database connection file
 
                     // Define the SQL query
                     $sql = "SELECT pitch_number, is_available FROM availability
@@ -78,7 +77,7 @@
                         foreach ($queryResults as $result) {
                             echo '<tr>';
                             echo '<td>' . $result['pitch_number'] . '</td>';
-                            echo '<td>' . $result['availability'] . '</td>';
+                            echo '<td>' . $result['is_available'] . '</td>';
                             echo '</tr>';
                         }
                         echo '</tbody>';

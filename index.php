@@ -48,39 +48,6 @@ if (!in_array($page_id, $_SESSION['viewed_pages'])) {
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
   <style>
-    /* Customize the about section */
-    .about-section {
-      background-color: #f9f9f9;
-      padding: 40px;
-    }
-
-    .about-section h2 {
-      font-size: 28px;
-      color: #333;
-    }
-
-    .about-section p {
-      font-size: 16px;
-      color: #666;
-    }
-
-    /* Customize the why choose section */
-    .why-choose-section {
-      background-color: #fff;
-      padding: 40px;
-    }
-
-    .why-choose-section h2 {
-      font-size: 28px;
-      color: #333;
-    }
-
-    .why-choose-section ul {
-      list-style-type: disc;
-      padding-left: 20px;
-      font-size: 16px;
-      color: #666;
-    }
   </style>
 </head>
 <body>
@@ -96,15 +63,19 @@ if (!in_array($page_id, $_SESSION['viewed_pages'])) {
   </section>
 
   <section id="about" class="about-section">
+  
   <div class="container">
-    <h2>About Us</h2>
-    <p>Sipraw Institution is a leading educational establishment dedicated to shaping the future through excellence in education and innovation. With a rich history spanning over two decades, Sipraw Institution has consistently remained committed to providing high-quality education and fostering an environment that nurtures students' intellectual growth and personal development.
+  <h2>About Us</h2>
+    <p>
 
-Our Mission:
-At Sipraw Institution, our mission is to empower and inspire students to realize their full potential by offering a diverse range of academic programs, cutting-edge research opportunities, and a supportive learning community. We aim to cultivate well-rounded individuals who possess critical thinking skills, global perspectives, and a strong sense of social responsibility.<br><br>
+Global Wild Swimming and Camping (GWSC) is an emerging player in the outdoor adventure industry, poised to extend its reach far beyond the local community. With a passion for exploring the untamed beauty of nature, GWSC has embarked on a mission to provide enthusiasts of camping and wild swimming with unforgettable experiences.<br><br>
+
+At GWSC, we believe in the transformative power of nature. Our team is dedicated to curating extraordinary outdoor experiences that nurture the spirit of exploration and foster a deep connection with the natural world. Whether you're an avid camper or a wild swimming enthusiast, GWSC invites you to embark on a journey of discovery, where breathtaking landscapes and unforgettable memories await. Join us as we venture beyond the ordinary, embracing the wild, and savoring the beauty of the great outdoors. Your next adventure begins with GWSC.<br><br>
 
 </p>
   </div>
+
+  
   </section class="carousel" id="carousel">
       <div class="container">
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
@@ -145,74 +116,7 @@ At Sipraw Institution, our mission is to empower and inspire students to realize
   
 
   
-  <section id="programs" class="programs-section">
-  <div class="container">
-    <h2>Programs Offered</h2><br>
-    <div class="row">
-
-    <div class="col-md-4">
-        <a href="CS.php" class="card-link">
-          <div class="card">
-            <img src="assets/CS.png" class="card-img-top" alt="Program 1">
-            <div class="card-body">
-              <h5 class="card-title">Computer Science</h5>
-              <p class="card-text">Explore the world of technology and innovation.</p>
-            </div>
-          </div>
-        </a>
-    </div>
-
-    <div class="col-md-4">
-        <a href="HRM.php" class="card-link">
-          <div class="card">
-            <img src="assets/main.jpg" class="card-img-top" alt="Program 1">
-            <div class="card-body">
-              <h5 class="card-title">Human Resource Management</h5>
-              <p class="card-text">Learn how to manage the Most valuable asset of any Organization. </p>
-            </div>
-          </div>
-        </a>
-    </div>
-      
-    <div class="col-md-4">
-        <a href="CP.php" class="card-link">
-          <div class="card">
-            <img src="assets/programming.jpg" class="card-img-top" alt="Program 1">
-            <div class="card-body">
-              <h5 class="card-title">Computer Programming</h5>
-              <p class="card-text">Learn fundametals of Computer Programming</p>
-            </div>
-          </div>
-        </a>
-    </div>
-
-    <div class="col-md-4">
-        <a href="BM.php" class="card-link">
-          <div class="card">
-            <img src="assets/BM.jpg" class="card-img-top" alt="Program 1">
-            <div class="card-body">
-              <h5 class="card-title">Business Management</h5>
-              <p class="card-text">Learn how to improve and develop your own business</p>
-            </div>
-          </div>
-        </a>
-    </div>
-
-    <div class="col-md-4">
-        <a href="BS.php" class="card-link" >
-          <div class="card">
-            <img src="assets/BS.png" class="card-img-top" alt="Program 1">
-            <div class="card-body">
-              <h5 class="card-title">Business Studies</h5>
-              <p class="card-text">Explore the World of Business</p>
-            </div>
-          </div>
-        </a>
-    </div>
-
-    </div>
-  </div>
-</section>
+> -->
 
 <section class="map">
     <div class="container">

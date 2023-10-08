@@ -1,6 +1,6 @@
 var navbar = document.getElementById("navbar");
 var brand =document.getElementById("brand");
-  var navbarHeight = 644;
+  var navbarHeight = 244;
 
   window.onscroll = function() {
     if (window.pageYOffset > navbarHeight) {
