@@ -10,7 +10,7 @@
     <title>Registration</title>
     
 </head>
-<body>
+<body class="registration-body">
     <div class="container-fluid">
         <div class="row">
             <!-- Left Column with Image -->
@@ -43,7 +43,7 @@
                             <input type="password" class="form-control" id="password" name="password" required>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Register</button>
+                        <button type="submit" class="btn btn-success">Register</button>
                     </form>
                     <div class="mt-4">
                         Already have an account..?<a href="login.php">Log in</a>

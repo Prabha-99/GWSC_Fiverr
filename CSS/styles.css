@@ -75,12 +75,38 @@ body, h1, h2, h3, p, ul, li {
     font-family: Arial, sans-serif;
   }
 
-  body.reviews-background {
+  .reviews-body{
     background-image: url('../ASSETS/pines.jpg');
     background-size: cover;
     background-repeat: no-repeat;
   }
   
+  .contact-body{
+    background-image: url('../ASSETS/pines.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .login-body{
+    background-color: #197237;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .registration-body{
+    background-color: #197237;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .arractionAttraction-body{
+    background-image: url('../ASSETS/pines.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+
+
   /* Header styles */
   .header {
     background-color: #001f3f; /* Navy Blue */

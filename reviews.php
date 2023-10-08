@@ -37,7 +37,7 @@ $result = mysqli_query($conn, $query);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reviews</title>
 </head>
-<body class="reviews-background">
+<body class="reviews-body">
     <?php include 'navbar.php'; ?>
     <br><br><br>
     <div class="container">
@@ -74,7 +74,7 @@ $result = mysqli_query($conn, $query);
                         <label for="review_text" class="form-label">Your Review:</label>
                         <textarea class="form-control" name="review_text" id="review_text" rows="4" required></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit Review</button>
+                    <button type="submit" class="btn btn-success">Submit Review</button>
                 </form>
                 <?php
                 if (isset($successMessage)) {

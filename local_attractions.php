@@ -10,8 +10,8 @@
     <title>Local Attractions</title>
     
 </head>
-<body>
-    <?php include 'navbar.php'; ?>
+<body class="arractionAttraction-body">
+    <?php include 'navbar.php'; ?><br><br><br>
 
     <div class="container">
         <h1 class="mt-5">Local Attractions</h1>
@@ -37,7 +37,7 @@
                     echo '<div class="card-body">';
                     echo '<h5 class="card-title">' . $row['alt'] . '</h5>';
                     echo '<p class="card-text">' . $row['description'] . '</p>';
-                    echo '<a href="#" class="btn btn-primary">Learn More</a>';
+                    echo '<a href="#" class="btn btn-success">Learn More</a>';
                     echo '</div>';
                     echo '</div>';
                     echo '</div>';

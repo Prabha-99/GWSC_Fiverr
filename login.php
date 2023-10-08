@@ -9,7 +9,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </head>
-<body>
+<body class="login-body">
     <?php $page_id = 'login'; ?>
 
     <div class="container">
@@ -38,9 +38,7 @@
                             <div class="g-recaptcha" data-sitekey="6Lc2dXooAAAAAIAfUNT0DOVxbAGilMNK4Spr6Df_"></div>
                         </div>
                         
-
-
-                        <button type="submit" class="btn btn-primary">Login</button>
+                        <button type="submit" class="btn btn-success">Login</button>
                     </form>
                     <div class="mt-4">
                         Don't have account..?<a href="registration.php">Sign up</a>

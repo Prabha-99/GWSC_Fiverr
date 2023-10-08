@@ -53,9 +53,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us</title>
 </head>
-<body>
-    <?php include 'navbar.php'; ?>
-    <br><br><br>
+<body class="contact-body">
+    <?php include 'navbar.php'; ?><br><br><br>
+    
     <div class="container">
         <h1 class="mt-5">Contact Us</h1>
 
@@ -83,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <label for="message" class="form-label">Message:</label>
                 <textarea class="form-control" name="message" id="message" rows="4" required><?php echo $message; ?></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Send Message</button>
+            <button type="submit" class="btn btn-success">Send Message</button>
         </form>
         
         <!-- Privacy Policy Link -->

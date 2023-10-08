@@ -47,8 +47,44 @@ if (!in_array($page_id, $_SESSION['viewed_pages'])) {
   <link rel="stylesheet" href="CSS/styles.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-  <style>
-  </style>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVEvFN5CtUbn15IovzgexT_8w0zuMWCos&callback=initMap" async defer></script>
+  <script>
+    // Initialize the map
+    function initMap() {
+        // Map options
+        var mapOptions = {
+            center: { lat: 43.2473611, lng: -107.0351111 }, // Set the initial map center
+            zoom: 5, // Set the zoom level
+        };
+
+        // Create a map object
+        var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+        // Define an array of marker positions
+        var markerPositions = [
+            { lat: 46.8797778, lng: -121.7268889, title: "Mount Rainier" },
+            { lat: 38.4748889, lng: -78.4509722, title: "Shenandoah National Park" },
+            { lat: 43.8554167, lng: -102.3411111, title: "Badlands National Park" },
+            { lat: 43.5737778, lng: -114.7004167, title: "Sawtooth National Recreation Area, Idahoy" },
+            
+        ];
+
+        // Create an array to store marker objects
+        var markers = [];
+
+        // Loop through the marker positions and create markers
+        for (var i = 0; i < markerPositions.length; i++) {
+            var marker = new google.maps.Marker({
+                position: markerPositions[i],
+                map: map,
+                title: "Marker " + (i + 1), // Marker title
+            });
+
+            // Add the marker to the markers array
+            markers.push(marker);
+        }
+    }
+</script>
 </head>
 <body>
   <?php include 'navbar.php'; ?>
@@ -58,7 +94,7 @@ if (!in_array($page_id, $_SESSION['viewed_pages'])) {
     <div class="container">
       <!-- Your content here -->
       <h1>Welcome to Global Wild Swimming and Camping</h1>
-      <p>We offer various programs to enhance your skills.</p>
+      <p>We offer various fun programs to give you the better experience.</p>
     </div>
   </section>
 
@@ -116,20 +152,10 @@ At GWSC, we believe in the transformative power of nature. Our team is dedicated
   
 
   
-> -->
 
 <section class="map">
     <div class="container">
-      <iframe
-          width="100%"
-          height="450"
-          frameborder="0"
-          style="border:0"
-          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3965.4072929433436!2d80.0840627!3d6.9752471!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae4487f3f7d11a5%3A0x66b2f60c7d9e67a8!2sYour%20Location%20Here!5e0!3m2!1sen!2sus!4v1608086093656!5m2!1sen!2sus"
-          allowfullscreen=""
-          aria-hidden="false"
-          tabindex="0">
-      </iframe>
+      <div id="map" style="width: 100%; height: 450px;"></div>
     </div>
 </section>
 
