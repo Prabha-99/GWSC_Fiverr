@@ -7,14 +7,14 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pitch Types and Availability</title>
     
 </head>
-<body>
+<body class="pitchAvailability-body">
+    <?php include 'navbar.php'; ?><br><br><br>
     <div class="container">
         <h1 class="mt-5">Pitch Types and Availability</h1>
 
-        <!-- Search Form -->
+        <!-- Form Searching pitchs  -->
         <form method="GET">
             <div class="mb-3">
                 <label for="pitch_type" class="form-label">Select Pitch Type:</label>
@@ -43,28 +43,28 @@
             if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 // Check if the 'pitch_type' parameter is set in the URL
                 if (isset($_GET['pitch_type'])) {
-                    // Retrieve search parameters
+                   
                     $pitchType = $_GET['pitch_type'];
                     $arrivalDate = $_GET['arrival_date'];
                     $departureDate = $_GET['departure_date'];
 
-                    // Define the SQL query
+                    
                     $sql = "SELECT pitch_number, is_available FROM availability
                             WHERE pitch_type = '$pitchType'
                             AND arrival_date >= '$arrivalDate'
                             AND departure_date <= '$departureDate'";
 
-                    // Execute the query
+                   
                     $queryResults = [];
                     $result = mysqli_query($conn, $sql);
 
                     if ($result) {
-                        // Fetch and store the query results
+                        
                         while ($row = mysqli_fetch_assoc($result)) {
                             $queryResults[] = $row;
                         }
 
-                        // Display the search results
+                      
                         echo '<h2 class="mt-4">Search Results:</h2>';
                         echo '<table class="table">';
                         echo '<thead>';
@@ -83,14 +83,14 @@
                         echo '</tbody>';
                         echo '</table>';
                     } else {
-                        // Handle query execution error
+                        
                         echo '<p>Error executing the query: ' . mysqli_error($conn) . '</p>';
                     }
 
-                    // Close the database connection
+                    
                     mysqli_close($conn);
                 } else {
-                    // Display an error message if 'pitch_type' is not set
+                    
                     echo '<p>Please select a pitch type.</p>';
                 }
             }
@@ -98,6 +98,10 @@
 
 
     </div>
+
+    <section class="footer">
+        <?php include 'footer.php'; ?>
+    </section>
 
     <script src=”https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js”></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

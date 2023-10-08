@@ -1,12 +1,12 @@
 <?php
 session_start();
-require_once('db_connection.php'); // Include your database connection file
+require_once('db_connection.php'); // Database connection 
 
 // Initialize $view_count to 0
 $view_count = 0;
 
 // Check if the page has a unique identifier (e.g., page_id)
-$page_id = 'index'; // You can set a unique identifier for each page
+$page_id = 'index'; // unique identifier for each page
 
 // Check if a session variable exists to prevent multiple counts in the same session
 if (!isset($_SESSION['viewed_pages'])) {
@@ -14,7 +14,7 @@ if (!isset($_SESSION['viewed_pages'])) {
 }
 
 if (!in_array($page_id, $_SESSION['viewed_pages'])) {
-    // Page hasn't been viewed in this session
+    
     $_SESSION['viewed_pages'][] = $page_id; // Add the page to the viewed pages array
 
     // Query the database to retrieve the current view count
@@ -26,7 +26,7 @@ if (!in_array($page_id, $_SESSION['viewed_pages'])) {
         $view_count = $row['view_count'];
         $view_count++; // Increment the view count
     } else {
-        // Page not found in the database, initialize view count to 1
+        // IF Page was not found in the database, initialize view count to 1
         $view_count = 1;
     }
 
@@ -35,7 +35,6 @@ if (!in_array($page_id, $_SESSION['viewed_pages'])) {
     mysqli_query($conn, $update_query);
 }
 
-// Rest of your HTML content
 ?>
 
 
@@ -49,9 +48,7 @@ if (!in_array($page_id, $_SESSION['viewed_pages'])) {
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVEvFN5CtUbn15IovzgexT_8w0zuMWCos&callback=initMap" async defer></script>
   <script>
-    // Initialize the map
     function initMap() {
-        // Map options
         var mapOptions = {
             center: { lat: 43.2473611, lng: -107.0351111 }, // Set the initial map center
             zoom: 5, // Set the zoom level
@@ -60,7 +57,7 @@ if (!in_array($page_id, $_SESSION['viewed_pages'])) {
         // Create a map object
         var map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
-        // Define an array of marker positions
+        // Defining the array of marker positions
         var markerPositions = [
             { lat: 46.8797778, lng: -121.7268889, title: "Mount Rainier" },
             { lat: 38.4748889, lng: -78.4509722, title: "Shenandoah National Park" },
@@ -92,7 +89,6 @@ if (!in_array($page_id, $_SESSION['viewed_pages'])) {
   <section class="background-section">
     <div class="overlay"></div>
     <div class="container">
-      <!-- Your content here -->
       <h1>Welcome to Global Wild Swimming and Camping</h1>
       <p>We offer various fun programs to give you the better experience.</p>
     </div>
@@ -122,13 +118,13 @@ At GWSC, we believe in the transformative power of nature. Our team is dedicated
             </div>
             <div class="carousel-inner">
               <div class="carousel-item active">
-                <img src="ASSETS/c3.jpg" class="d-block w-100" alt="...">
+                <img src="ASSETS/camping/shenandoah.jpg" class="d-block w-100" alt="...">
               </div>
               <div class="carousel-item">
-                <img src="ASSETS/c2.jpg" class="d-block w-100" alt="...">
+                <img src="ASSETS/camping/sawtooth.jpg" class="d-block w-100" alt="...">
               </div>
               <div class="carousel-item">
-                <img src="ASSETS/Camping.jpg" class="d-block w-100" alt="...">
+                <img src="ASSETS/camping/national-park-montana.jpg" class="d-block w-100" alt="...">
               </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">

@@ -1,8 +1,8 @@
 <?php
 session_start();
-require_once('db_connection.php'); // Include your database connection file
+require_once('db_connection.php'); //  Database connection
 
-// Check if the user is already locked out
+// Checks whether the user is already locked out
 if (isset($_SESSION['login_attempts']) && $_SESSION['login_attempts'] >= 3 && time() - $_SESSION['lockout_start'] < 600) {
     header('Location: login.php?error=account_locked');
     exit();
@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Verify reCAPTCHA
     $recaptchaResponse = $_POST['g-recaptcha-response'];
-    $secretKey = '6Lc2dXooAAAAAAXMS1tAhsRxJw9y1yBNWgTVoKB3'; // Replace with your reCAPTCHA secret key
+    $secretKey = '6Lc2dXooAAAAAAXMS1tAhsRxJw9y1yBNWgTVoKB3'; // reCAPTCHA secret key
 
     $url = 'https://www.google.com/recaptcha/api/siteverify';
     $data = [
@@ -37,22 +37,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $responseData = json_decode($result);
 
         if ($responseData->success) {
-            // reCAPTCHA was verified successfully
-            // Query the database to check if the user exists
+            // reCAPTCHA was verified successfully and Query the database to check if the user exists
             $query = "SELECT * FROM users WHERE email = '$email'";
             $result = mysqli_query($conn, $query);
 
             if ($result && mysqli_num_rows($result) > 0) {
                 $user = mysqli_fetch_assoc($result);
 
-                // Verify the password (you should use password_hash() when registering users)
+                // Verify the password 
                 if (password_verify($password, $user['password'])) {
-                    // Authentication successful
+
                     $_SESSION['user_id'] = $user['uid'];
                     $_SESSION['user_firstname'] = $user['firstname'];
                     $_SESSION['user_lastname'] = $user['lastname'];
 
-                    // Reset login attempts
+                    // Resetting login attempts
                     unset($_SESSION['login_attempts']);
                     unset($_SESSION['lockout_start']);
 
@@ -78,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit();
         }
     } else {
-        // Unable to verify CAPTCHA; handle the error
+        // Unable to verify CAPTCHA
         incrementLoginAttempts();
         header('Location: login.php?error=captcha_verification_error');
         exit();

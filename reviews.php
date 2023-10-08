@@ -1,21 +1,20 @@
 <?php
-require_once('db_connection.php'); // Include your database connection file
+require_once('db_connection.php');  // Database connection 
 
-// Process Review Submission
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Retrieve form data
+    
     $username = $_POST['username'];
     $reviewText = $_POST['review_text'];
 
-    // Insert the new review into the database
     $query = "INSERT INTO reviews (username, review_text) VALUES ('$username', '$reviewText')";
     $result = mysqli_query($conn, $query);
 
     if ($result) {
-        // Review successfully added
+        
         $successMessage = 'Review submitted successfully!';
     } else {
-        // Handle insertion error
+        
         $errorMessage = 'Error submitting review: ' . mysqli_error($conn);
     }
 }
@@ -43,9 +42,9 @@ $result = mysqli_query($conn, $query);
     <div class="container">
         <h1 class="mt-5">Reviews</h1>
 
-        <!-- Display Existing Reviews -->
+        
         <div class="row mt-4">
-            <!-- Loop through and display reviews here -->
+            <!-- Looping and display reviews -->
             <?php
             while ($row = mysqli_fetch_assoc($result)) {
                 echo '<div class="col-md-6">';
@@ -61,7 +60,7 @@ $result = mysqli_query($conn, $query);
             ?>
         </div>
 
-        <!-- Write a New Review Form -->
+        <!-- New Review Form -->
         <div class="row mt-4">
             <div class="col-md-6">
                 <h2>Write a Review</h2>
@@ -101,6 +100,5 @@ $result = mysqli_query($conn, $query);
 </html>
 
 <?php
-// Close the database connection
 mysqli_close($conn);
 ?>

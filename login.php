@@ -14,12 +14,12 @@
 
     <div class="container">
         <div class="row">
-            <!-- Left Column with Image -->
+            
             <div class="col-md-6">
                 <img src="ASSETS/login." alt="Login Image" class="img-fluid">
             </div>
             
-            <!-- Right Column with Login Form -->
+            
             <div class="col-md-6 d-flex align-items-center justify-content-center">
                 <div>
                     <h1 class="mb-4">Login</h1>
@@ -50,7 +50,7 @@
 
     
 
-<!-- Add this code at the end of your login.php file -->
+
 <div class="modal fade" id="loginErrorModal" tabindex="-1" aria-labelledby="loginErrorModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -59,7 +59,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <!-- This div will contain the error message -->
+                
                 <div id="loginErrorMessage"></div>
             </div>
             <div class="modal-footer">
@@ -70,27 +70,31 @@
 </div>
 
 <script>
-    // Check if the URL has an error parameter (e.g., ?error=user_not_found)
+    // Check if the URL has an error parameter
     const urlParams = new URLSearchParams(window.location.search);
     const errorParam = urlParams.get('error');
 
     // Check if the errorParam is not null and show the modal with the corresponding error message
     if (errorParam === 'user_not_found') {
-        // User not found error message
+        
         document.getElementById('loginErrorMessage').innerHTML = 'User not found. Please check your email.';
         $('#loginErrorModal').modal('show');
     } else if (errorParam === 'account_locked') {
-        // Account locked error message
+        
         document.getElementById('loginErrorMessage').innerHTML = 'Your account is locked. Please try again later.';
         $('#loginErrorModal').modal('show');
     } else if (errorParam === 'invalid_password') {
-        // Invalid password error message
+        
         document.getElementById('loginErrorMessage').innerHTML = 'Invalid password. Please try again.';
         $('#loginErrorModal').modal('show');
     }
 </script>
-<!-- Add Bootstrap JS and jQuery (for Bootstrap) if needed -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+
+<script src=”https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js”></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+<script src="SCRIPTS/scroll.js"></script>
 
 </body>
 </html>

@@ -1,27 +1,26 @@
 <?php
 
 // Configure SMTP settings
-ini_set("SMTP", "smtp.gmail.com"); // Replace with your SMTP server
-ini_set("smtp_port", "587"); // Replace with the appropriate port (e.g., 587 for TLS)
-ini_set("sendmail_from", "prabhashana77@gmail.com"); // Replace with your email address
+ini_set("SMTP", "smtp.gmail.com"); // SMTP server
+ini_set("smtp_port", "587"); // port
+ini_set("sendmail_from", "example@gmail.com"); // email address
 
-// Define variables for form input and error messages
+// variables for form input and error messages
 $name = $email = $message = $successMessage = $errorMessage = "";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Retrieve form data
     $name = $_POST['name'];
     $email = $_POST['email'];
     $message = $_POST['message'];
 
-    // Validate form data (add your own validation logic if needed)
+    
     if (empty($name) || empty($email) || empty($message)) {
         $errorMessage = 'Please fill in all fields.';
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errorMessage = 'Invalid email format.';
     } else {
-        // Send email (you may need to configure your server for this)
-        $to = 'prabhashana77@gmail.com'; // Replace with your email address
+        // Send email 
+        $to = 'example@gmail.com'; 
         $subject = 'New Contact Form Submission';
         $headers = "From: $email\r\n";
         $headers .= "Reply-To: $email\r\n";
@@ -32,10 +31,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $mailBody .= "Message:<br>$message";
 
         if (mail($to, $subject, $mailBody, $headers)) {
-            // Email sent successfully
+            
             $successMessage = 'Your message has been sent successfully!';
         } else {
-            // Email sending failed
+            
             $errorMessage = 'Error sending your message. Please try again later.';
         }
     }

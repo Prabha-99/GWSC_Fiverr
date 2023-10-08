@@ -18,16 +18,10 @@
 
         <div class="row mt-4">
             <?php
-            // Include your database connection file
             require_once 'db_connection.php';
-
-            // Define a query to retrieve local attractions data
             $query = "SELECT * FROM local_attractions";
-
-            // Execute the query
             $result = mysqli_query($conn, $query);
 
-            // Check if there are results
             if (mysqli_num_rows($result) > 0) {
                 // Loop through the results and generate cards
                 while ($row = mysqli_fetch_assoc($result)) {
@@ -45,12 +39,14 @@
             } else {
                 echo '<p>No local attractions found.</p>';
             }
-
-            // Close the database connection
             mysqli_close($conn);
             ?>
         </div>
     </div>
+
+    <section class="footer">
+        <?php include 'footer.php'; ?>
+    </section>
 
     <script src=”https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js”></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

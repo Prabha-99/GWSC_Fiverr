@@ -7,7 +7,7 @@
             </div>
             <div class="col-md-6">
                 <div class="social-icons">
-                    <!-- Add social icons with links here -->
+                    <!-- Social icons with links -->
                     <a href="#" class="btn btn-link"><i class="bi bi-facebook"></i></a>
                     <a href="#" class="btn btn-link"><i class="bi bi-twitter"></i></a>
                     <a href="#" class="btn btn-link"><i class="bi bi-instagram"></i></a>

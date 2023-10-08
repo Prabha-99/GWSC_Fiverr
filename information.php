@@ -4,11 +4,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Information</title>
-    <!-- Add Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Add your custom CSS for the Information page -->
-    <link rel="stylesheet" href="CSS/information.css">
+    <?php include 'header.php'; ?>
+    <link rel="stylesheet" href="CSS/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVEvFN5CtUbn15IovzgexT_8w0zuMWCos&callback=initMap" async defer></script>
+    <script>
+        function initMap() {
+            var mapOptions = {
+                center: { lat: 43.2473611, lng: -107.0351111 }, // Set the initial map center
+                zoom: 5, // Set the zoom level
+            };
+
+            // Create a map object
+            var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+            // Defining the array of marker positions
+            var markerPositions = [
+                { lat: 46.8797778, lng: -121.7268889, title: "Mount Rainier" },
+                { lat: 38.4748889, lng: -78.4509722, title: "Shenandoah National Park" },
+                { lat: 43.8554167, lng: -102.3411111, title: "Badlands National Park" },
+                { lat: 43.5737778, lng: -114.7004167, title: "Sawtooth National Recreation Area, Idahoy" },
+                
+            ];
+
+            // Create an array to store marker objects
+            var markers = [];
+
+            // Loop through the marker positions and create markers
+            for (var i = 0; i < markerPositions.length; i++) {
+                var marker = new google.maps.Marker({
+                    position: markerPositions[i],
+                    map: map,
+                    title: "Marker " + (i + 1), // Marker title
+                });
+
+                // Add the marker to the markers array
+                markers.push(marker);
+            }
+        }
+    </script>
 </head>
 <body>
     <?php include 'navbar.php'; ?>
@@ -41,11 +76,10 @@
         </section>
     </div>
 
-    <!-- Add Bootstrap JS and jQuery (for Bootstrap) if needed -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+    <script src=”https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js”></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script src="SCRIPTS/scroll.js"></script>
 </body>
 </html>
-```
-
-This template provides sections for each of your specified requirements. You can add content, images, and styling to each section as needed. Remember to link your custom CSS file ("information.css") to style this page according to your design preferences. Additionally, you can populate each section with relevant information, such as pitch types and availability details, features, location information, maps, and local attractions.
