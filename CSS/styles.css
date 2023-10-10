@@ -117,6 +117,12 @@ body, h1, h2, h3, p, ul, li {
     background-repeat: no-repeat;
   }
 
+  .features-body{
+    background-color: #d6d4d4;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
 
   /* Header styles */
   .header {

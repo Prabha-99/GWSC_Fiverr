@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Campsite Details</title>
 </head>
-<body>
+<body class="features-body">
     <?php include 'navbar.php'; ?><br><br><br>
 
     <div class="container">
