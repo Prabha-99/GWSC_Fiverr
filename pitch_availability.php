@@ -35,7 +35,7 @@
             <button type="submit" class="btn btn-primary">Search Availability</button>
         </form>
 
-        <!-- Display Search Results -->
+        
         <?php
 
             require_once('db_connection.php'); 
