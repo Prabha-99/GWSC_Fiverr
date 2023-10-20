@@ -1,11 +1,25 @@
 <?php
 
-// Configure SMTP settings
-ini_set("SMTP", "smtp.gmail.com"); // SMTP server
-ini_set("smtp_port", "587"); // port
-ini_set("sendmail_from", "example@gmail.com"); // email address
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
-// variables for form input and error messages
+require 'vendor/autoload.php'; // Include the PHPMailer library
+
+
+$mail = new PHPMailer(true);
+
+// SMTP Configuration
+$mail->isSMTP();
+$mail->SMTPDebug = SMTP::DEBUG_OFF; 
+$mail->Host = 'smtp.gmail.com'; 
+$mail->SMTPAuth = true;
+$mail->Username = 'prabhashana77@gmail.com'; // Replace with your Gmail address
+$mail->Password = 'cvsq poly nfvf coyf'; // Use your Gmail App Password if you gmail acc have 2F authentication.. otherwise normal gmail login password.
+$mail->SMTPSecure = 'tls';
+$mail->Port = 587;
+
+
 $name = $email = $message = $successMessage = $errorMessage = "";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -13,29 +27,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
     $message = $_POST['message'];
 
-    
     if (empty($name) || empty($email) || empty($message)) {
         $errorMessage = 'Please fill in all fields.';
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errorMessage = 'Invalid email format.';
     } else {
-        // Send email 
-        $to = 'example@gmail.com'; 
-        $subject = 'New Contact Form Submission';
-        $headers = "From: $email\r\n";
-        $headers .= "Reply-To: $email\r\n";
-        $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
+        try {
+            // Set sender and recipient
+            $mail->setFrom($email, $name);
+            $mail->addAddress('prabhashana.work@gmail.com'); // Replace your Recipient email address.
+            $mail->Subject = 'New Contact Form Submission';
+            $mail->Body = "Name: $name\nEmail: $email\nMessage:\n$message";
 
-        $mailBody = "Name: $name<br>";
-        $mailBody .= "Email: $email<br><br>";
-        $mailBody .= "Message:<br>$message";
-
-        if (mail($to, $subject, $mailBody, $headers)) {
-            
+            $mail->send();
             $successMessage = 'Your message has been sent successfully!';
-        } else {
-            
-            $errorMessage = 'Error sending your message. Please try again later.';
+        } catch (Exception $e) {
+            $errorMessage = 'Error sending your message: ' . $mail->ErrorInfo;
         }
     }
 }
@@ -44,10 +51,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<?php include 'header.php'; ?>
-  <link rel="stylesheet" href="CSS/styles.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <?php include 'header.php'; ?>
+    <link rel="stylesheet" href="CSS/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us</title>
@@ -55,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body class="contact-body">
     <?php include 'navbar.php'; ?><br><br><br><br>
     
-    <div class="container">
+    <div class="container text-center"> <!-- Center content -->
         <h1 class="mt-5">Contact Us</h1>
 
         <!-- Display success or error message -->
@@ -95,10 +102,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php include 'footer.php'; ?>
     </section>
 
-    <script src=”https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js”></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     <script src="SCRIPTS/scroll.js"></script>
+    
+    
+
 </body>
 </html>
