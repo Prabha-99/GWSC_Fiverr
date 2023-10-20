@@ -69,26 +69,82 @@
     </div>
 </div>
 
-<script>
-    // Check if the URL has an error parameter
-    const urlParams = new URLSearchParams(window.location.search);
-    const errorParam = urlParams.get('error');
+<div id="countdown-container" class="mt-2">
+    Account locked for: <span id="countdown"></span>
+</div>
 
-    // Check if the errorParam is not null and show the modal with the corresponding error message
-    if (errorParam === 'user_not_found') {
-        
-        document.getElementById('loginErrorMessage').innerHTML = 'User not found. Please check your email.';
-        $('#loginErrorModal').modal('show');
-    } else if (errorParam === 'account_locked') {
-        
-        document.getElementById('loginErrorMessage').innerHTML = 'Your account is locked. Please try again later.';
-        $('#loginErrorModal').modal('show');
-    } else if (errorParam === 'invalid_password') {
-        
-        document.getElementById('loginErrorMessage').innerHTML = 'Invalid password. Please try again.';
-        $('#loginErrorModal').modal('show');
-    }
-</script>
+    <script>
+        // Check if the URL has an error parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const errorParam = urlParams.get('error');
+
+        // Check if the errorParam is not null and show the modal with the corresponding error message
+        if (errorParam === 'user_not_found') {
+            
+            document.getElementById('loginErrorMessage').innerHTML = 'User not found. Please check your email.';
+            $('#loginErrorModal').modal('show');
+        } else if (errorParam === 'account_locked') {
+            
+            document.getElementById('loginErrorMessage').innerHTML = 'Your account is locked. Please try again later.';
+            $('#loginErrorModal').modal('show');
+        } else if (errorParam === 'invalid_password') {
+            
+            document.getElementById('loginErrorMessage').innerHTML = 'Invalid password. Please try again.';
+            $('#loginErrorModal').modal('show');
+        }
+    </script>
+
+    
+    <script>
+        $(document).ready(function() {
+            // Function to update the countdown timer
+            function updateCountdown(seconds) {
+                const minutes = Math.floor(seconds / 60);
+                const remainingSeconds = seconds % 60;
+                const countdownElement = document.getElementById('countdown');
+                countdownElement.innerHTML = `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+            }
+
+            // Function to lock and unlock the form
+            function toggleFormLock(locked) {
+                const emailInput = document.getElementById('email');
+                const passwordInput = document.getElementById('password');
+                const loginButton = document.querySelector('button[type="submit"]');
+
+                emailInput.disabled = locked;
+                passwordInput.disabled = locked;
+                loginButton.disabled = locked;
+            }
+
+            // Check if the URL has an error parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            const errorParam = urlParams.get('error');
+
+            
+
+            if (errorParam === 'account_locked') {
+                const lockoutTime = 600; // 10 minutes
+                let remainingTime = lockoutTime;
+
+                toggleFormLock(true);
+
+                // Start the countdown
+                const countdownInterval = setInterval(function() {
+                    if (remainingTime > 0) {
+                        updateCountdown(remainingTime);
+                        remainingTime--;
+                    } else {
+                        toggleFormLock(false);
+                        clearInterval(countdownInterval);
+                        document.getElementById('countdown-container').style.display = 'none';
+                    }
+                }, 1000);
+            } else {
+                document.getElementById('countdown-container').style.display = 'none';
+            }
+        });
+    </script>
+
 
 <script src=”https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js”></script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
