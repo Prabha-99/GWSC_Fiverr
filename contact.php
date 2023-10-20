@@ -14,7 +14,7 @@ $mail->isSMTP();
 $mail->SMTPDebug = SMTP::DEBUG_OFF; 
 $mail->Host = 'smtp.gmail.com'; 
 $mail->SMTPAuth = true;
-$mail->Username = 'prabhashana77@gmail.com'; // Replace with your Gmail address
+$mail->Username = 'testemail@gmail.com'; // Replace with your Gmail address
 $mail->Password = 'cvsq poly nfvf coyf'; // Use your Gmail App Password if you gmail acc have 2F authentication.. otherwise normal gmail login password.
 $mail->SMTPSecure = 'tls';
 $mail->Port = 587;
@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         try {
             // Set sender and recipient
             $mail->setFrom($email, $name);
-            $mail->addAddress('prabhashana.work@gmail.com'); // Replace your Recipient email address.
+            $mail->addAddress('testemail@gmail.com'); // Replace your Recipient email address.
             $mail->Subject = 'New Contact Form Submission';
             $mail->Body = "Name: $name\nEmail: $email\nMessage:\n$message";
 
