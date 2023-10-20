@@ -43,6 +43,9 @@
                     <div class="mt-4">
                         Don't have account..?<a href="registration.php">Sign up</a>
                     </div>
+                    <div id="countdown-container" class="mt-2">
+                        Retry in: <span id="countdown"></span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -69,32 +72,8 @@
     </div>
 </div>
 
-<div id="countdown-container" class="mt-2">
-    Account locked for: <span id="countdown"></span>
-</div>
 
-    <script>
-        // Check if the URL has an error parameter
-        const urlParams = new URLSearchParams(window.location.search);
-        const errorParam = urlParams.get('error');
 
-        // Check if the errorParam is not null and show the modal with the corresponding error message
-        if (errorParam === 'user_not_found') {
-            
-            document.getElementById('loginErrorMessage').innerHTML = 'User not found. Please check your email.';
-            $('#loginErrorModal').modal('show');
-        } else if (errorParam === 'account_locked') {
-            
-            document.getElementById('loginErrorMessage').innerHTML = 'Your account is locked. Please try again later.';
-            $('#loginErrorModal').modal('show');
-        } else if (errorParam === 'invalid_password') {
-            
-            document.getElementById('loginErrorMessage').innerHTML = 'Invalid password. Please try again.';
-            $('#loginErrorModal').modal('show');
-        }
-    </script>
-
-    
     <script>
         $(document).ready(function() {
             // Function to update the countdown timer
@@ -120,7 +99,20 @@
             const urlParams = new URLSearchParams(window.location.search);
             const errorParam = urlParams.get('error');
 
+            // Check if the errorParam is not null and show the modal with the corresponding error message
+        if (errorParam === 'user_not_found') {
             
+            document.getElementById('loginErrorMessage').innerHTML = 'User not found. Please check your email.';
+            $('#loginErrorModal').modal('show');
+        } else if (errorParam === 'account_locked') {
+            
+            document.getElementById('loginErrorMessage').innerHTML = 'Your account is locked. Please try again 10 minutes.';
+            $('#loginErrorModal').modal('show');
+        } else if (errorParam === 'invalid_password') {
+            
+            document.getElementById('loginErrorMessage').innerHTML = 'Invalid password. Please try again.';
+            $('#loginErrorModal').modal('show');
+        }
 
             if (errorParam === 'account_locked') {
                 const lockoutTime = 600; // 10 minutes
